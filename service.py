@@ -15,10 +15,12 @@ class MirrorServ(Service):
     @characteristic("4139", CharFlags.NOTIFY | CharFlags.WRITE)
     def update(self, options):
         pass
-
+    
     @characteristic("413A", CharFlags.READ)
     def ping(self, options):
         return bytes("pong!")
+
+
 
     def connect(self):
         print("bazinga")
