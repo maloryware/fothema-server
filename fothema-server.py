@@ -26,7 +26,7 @@ async def main():
 
     advert = Advertisement("FOTHEMA Bluetooth Service", service_ids, appearance, timeout)
     await service.connect()
-    
+
     while True:
         # Update the heart rate.
         # Handle dbus requests.
@@ -34,3 +34,4 @@ async def main():
 
     await bus.wait_for_disconnect()
     
+asyncio.run(main())
