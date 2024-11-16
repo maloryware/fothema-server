@@ -14,6 +14,7 @@ timeout = 99999
 
 
 async def main():
+    print("connected!")
     bus = await get_message_bus()
     agent = NoIoAgent()
     service = MirrorServ()
@@ -24,4 +25,12 @@ async def main():
     adapter = await Adapter.get_first(bus)
 
     advert = Advertisement("FOTHEMA Bluetooth Service", service_ids, appearance, timeout)
+    await service.connect()
+    
+    while True:
+        # Update the heart rate.
+        # Handle dbus requests.
+        await asyncio.sleep(5)
+
+    await bus.wait_for_disconnect()
     
