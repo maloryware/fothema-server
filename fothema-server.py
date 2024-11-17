@@ -25,7 +25,8 @@ async def main():
     adapter = await Adapter.get_first(bus)
 
     advert = Advertisement("FOTHEMA Bluetooth Service", service_ids, appearance, timeout)
-
+    
+    await advert.register(bus, adapter)
     while True:
         # Update the heart rate.
         # Handle dbus requests.
