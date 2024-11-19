@@ -3,14 +3,14 @@ from bluez_peripheral.gatt.service import ServiceCollection
 from bluez_peripheral.advert import Advertisement
 from bluez_peripheral.agent import NoIoAgent
 from service import *
-from identifiers import Identifiers
+from consts import Identifiers
 import asyncio
 
 # for information on Bluetooth assigned numbers, see https://specificationrefs.bluetooth.com/assigned-values/Appearance%20Values.pdf
 
 service_ids = [Identifiers.core_service]
 appearance = 0
-timeout = 99999
+timeout = 600
 
 
 async def main():

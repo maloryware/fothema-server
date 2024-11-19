@@ -2,12 +2,15 @@ from bluez_peripheral.gatt.service import Service
 from bluez_peripheral.gatt.characteristic import characteristic, CharacteristicFlags as CharFlags
 from bluez_peripheral.gatt.descriptor import descriptor, DescriptorFlags as DescFlags
 import struct
-from identifiers import Identifiers
+from consts import Identifiers
+import re
+
 
 
 
 
 class MirrorServ(Service):
+
     def __init__(self):
         super().__init__(Identifiers.core_service, True)
 
@@ -16,10 +19,16 @@ class MirrorServ(Service):
     def update(self, options):
         pass
     
+
     @characteristic("413A", CharFlags.READ)
     def ping(self, options):
         return bytes("pong!")
+    
 
+    @characteristic("413B", CharFlags.READ)
+    def send(self, options):
+        return
+    
 
 
     def connect(self):
