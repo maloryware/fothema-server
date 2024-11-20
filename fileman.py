@@ -1,5 +1,4 @@
 import re
-from os import remove, path
 from consts import Identifiers
 import json
 
@@ -14,6 +13,9 @@ class Config:
             buf = re.sub("(\\t*(\\n+| \\s+))\\t*", "", buf)
             out = json.loads(buf)
             return out
+    
+
+
     
     def write(new_config):
 
