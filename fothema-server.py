@@ -1,7 +1,7 @@
 import asyncio
 from bluez_peripheral.util import get_message_bus, Adapter
 from bluez_peripheral.advert import Advertisement
-from bluez_peripheral.agent import NoIoAgent
+from bluez_peripheral.agent import BaseAgent, AgentCapability
 from service import MirrorServ
 from consts import Identifiers
 
@@ -16,7 +16,7 @@ timeout = 600
 async def main():
     print("server starting")
     bus = await get_message_bus()
-    agent = NoIoAgent()
+    agent = BaseAgent(AgentCapability(0))
     service = MirrorServ()
 
     await service.register(bus)
