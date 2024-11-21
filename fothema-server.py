@@ -2,7 +2,7 @@ import asyncio
 from bluez_peripheral.util import get_message_bus, Adapter
 from bluez_peripheral.advert import Advertisement
 from bluez_peripheral.agent import NoIoAgent
-from service import MirrorServ
+from service import *
 from consts import Identifiers
 
 
@@ -14,6 +14,7 @@ timeout = 600
 
 
 async def main():
+    check = False
     print("server starting")
     bus = await get_message_bus()
     agent = NoIoAgent()
@@ -30,7 +31,9 @@ async def main():
 
     await advert.register(bus, adapter)
     while True:
-
+        if check:
+            service.connect()
+            check = False
         # Update the heart rate.
         # Handle dbus requests.
         await asyncio.sleep(5)
