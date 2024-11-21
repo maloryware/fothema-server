@@ -1,10 +1,10 @@
-from bluez_peripheral.util import *
-from bluez_peripheral.gatt.service import ServiceCollection
-from bluez_peripheral.advert import Advertisement
-from bluez_peripheral.agent import BaseAgent
-from service import *
-from consts import Identifiers
 import asyncio
+from bluez_peripheral.util import get_message_bus, Adapter
+from bluez_peripheral.advert import Advertisement
+from bluez_peripheral.agent import NoIoAgent
+from service import MirrorServ
+from consts import Identifiers
+
 
 # for information on Bluetooth assigned numbers, see https://specificationrefs.bluetooth.com/assigned-values/Appearance%20Values.pdf
 
@@ -16,23 +16,26 @@ timeout = 600
 async def main():
     print("server starting")
     bus = await get_message_bus()
-    agent = BaseAgent(0)
+    agent = NoIoAgent()
     service = MirrorServ()
-        
+
     await service.register(bus)
     await agent.register(bus)
 
     adapter = await Adapter.get_first(bus)
 
-    advert = Advertisement("FOTHEMA Bluetooth Service", service_ids, appearance, timeout)
-    
+    advert = Advertisement(
+        "FOTHEMA Bluetooth Service", service_ids, appearance, timeout
+    )
+
     await advert.register(bus, adapter)
     while True:
-        
+
         # Update the heart rate.
         # Handle dbus requests.
         await asyncio.sleep(5)
 
     await bus.wait_for_disconnect()
-    
+
+
 asyncio.run(main())
