@@ -25,12 +25,13 @@ class MirrorServ(Service):
         return bytes(json.dumps(Config.read))
     
     @characteristic("413C", CharFlags.WRITE)
-    def receive(self):
-        Config.write()
+    def receive(self, config):
+        Config.write(config)
 
     @characteristic("413D", CharFlags.WRITE)
     def backup(self):
         Config.write(Config.read, Identifiers.backup_config)
-
-    def connect(self):
-        print("bazinga")
+    
+    @characteristic("413E", CharFlags.READ)
+    def connect(self, deviceInfo):
+        print(f"device connected! info: {deviceInfo}", )

@@ -31,10 +31,7 @@ async def main():
 
     await advert.register(bus, adapter)
     while True:
-        if check:
-            service.connect()
-            check = False
-        # Update the heart rate.
+        
         # Handle dbus requests.
         await asyncio.sleep(5)
 
