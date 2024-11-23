@@ -27,7 +27,6 @@ class Config:
             saved.write("let config = ")
             buf = json.dumps(new_config, sort_keys=True, indent=4)
             buf = re.sub("(\")(\\S.+)(\")(?=: )", "\\2", buf)
-            # buf = re.sub("(.{1}$)", "", buf)
             saved.write(buf)
             saved.write("; \n\n")
             saved.write("if (typeof module !== \"undefined\") { module.exports = config; }")

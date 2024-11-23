@@ -14,7 +14,6 @@ timeout = 600
 
 
 async def main():
-    check = False
     print("server starting")
     bus = await get_message_bus()
     agent = NoIoAgent()
@@ -31,11 +30,11 @@ async def main():
 
     await advert.register(bus, adapter)
     while True:
-        
+
         # Handle dbus requests.
         await asyncio.sleep(5)
 
-    await bus.wait_for_disconnect()
+    # await bus.wait_for_disconnect()
 
 
 asyncio.run(main())
