@@ -5,7 +5,6 @@ from fileman import Config
 import json
 from consts import Identifiers
 
-
 class MirrorServ(Service):
 
     def __init__(self):
@@ -18,11 +17,14 @@ class MirrorServ(Service):
     
     @characteristic("413A", CharFlags.READ)
     def ping(self):
+        print(f"Ping function called! Sending {bytes("pong!")}")
         return bytes("pong!")
 
     @characteristic("413B", CharFlags.READ)
     def send(self):
-        return bytes(json.dumps(Config.read))
+        toSend = bytes(json.dumps(Config.read))
+        print(f"Send function called! Sending {toSend}")
+        return toSend
     
     @characteristic("413C", CharFlags.WRITE)
     def receive(self, config):
