@@ -24,7 +24,7 @@ class MirrorServ(Service):
     @characteristic("413B", CharFlags.READ)
     def send(self, arg):
         print(f"2nd argument: {arg}")
-        toSend = bytes(json.dumps(Config.read))
+        toSend = bytes(json.dumps(Config.read()))
         print(f"Send function called! Sending {toSend}")
         return toSend
     
@@ -38,4 +38,4 @@ class MirrorServ(Service):
     
     @characteristic("413E", CharFlags.READ)
     def connect(self, deviceInfo):
-        print(f"device connected! info: {deviceInfo}", )
+        print(f"device connected! info: {deviceInfo}")
