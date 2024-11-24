@@ -29,6 +29,8 @@ async def main():
     )
 
     await advert.register(bus, adapter)
+
+    # Server-side functional loop - run everything that needs to be proactively handled by the server here.
     while True:
 
         # Handle dbus requests.
