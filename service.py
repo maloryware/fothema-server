@@ -17,7 +17,8 @@ class MirrorServ(Service):
     
     @characteristic("413A", CharFlags.READ)
     def ping(self):
-        print(f"Ping function called! Sending {bytes("pong!")}")
+        toSend = bytes("pong!")
+        print(f"Ping function called! Sending {toSend}")
         return bytes("pong!")
 
     @characteristic("413B", CharFlags.READ)
