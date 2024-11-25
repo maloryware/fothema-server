@@ -40,7 +40,7 @@ class MirrorServ(Service):
     @characteristic("413E", CharFlags.READ)
     def connect(self, deviceInfo, options):
         print(f"device connected, info: {deviceInfo}")
-
-    @characteristic("4140", CharFlags.READ)
-    def resetDefault(self, options):
-        print("Resetting config to default [UNIMPLEMENTED]")
+        
+    ###@characteristic("4140", CharFlags.READ)
+    ###def resetDefault(self, options):
+    ###    print("Resetting config to default [UNIMPLEMENTED]")
