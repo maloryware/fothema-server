@@ -27,7 +27,7 @@ class MirrorServ(Service):
         print(f"sending config with offset={options.offset}, mtu={options.mtu}")
         toSend = Config.read()
         toSend = json.dumps(toSend)
-        toSend = toSend[options.offset:options.mtu]
+        toSend = toSend[options.offset:options.mtu:]
         toSend = bytes(str(toSend), "utf-8")
         print(f"tosend contents: {toSend}\n ------------------------------------- ")
         return toSend
