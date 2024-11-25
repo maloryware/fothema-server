@@ -23,10 +23,9 @@ class MirrorServ(Service):
 
     @characteristic("413B", CharFlags.READ)
     def send(self, options):
-        toSend = bytes(json.dumps(Config.read()), "utf-8")
         # print(f"Sending config: {toSend}")
         print(f"sending config with offset={options.offset}")
-        return toSend
+        return bytes(json.dumps(Config.read()), "utf-8")
     
     @characteristic("413C", CharFlags.WRITE)
     def receive(self, config, options):
