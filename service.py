@@ -23,9 +23,9 @@ class MirrorServ(Service):
 
     @characteristic("413B", CharFlags.READ)
     def send(self, arg):
-        print(f"2nd argument: {arg}")
+        # print(f"2nd argument: {arg}")
         toSend = bytes(json.dumps(Config.read()), "utf-8")
-        print(f"Send function called! Sending {toSend}")
+        # print(f"Send function called! Sending {toSend}")
         return toSend
     
     @characteristic("413C", CharFlags.WRITE)
