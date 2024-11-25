@@ -29,6 +29,7 @@ class MirrorServ(Service):
         toSend = json.dumps(toSend)
         toSend = toSend[options.offset:]
         toSend = bytes(str(toSend), "utf-8")
+        print(f"tosend contents: {toSend}\n ------------------------------------- ")
         return toSend
     
     
