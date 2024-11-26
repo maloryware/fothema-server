@@ -28,11 +28,8 @@ async def main():
         "FOTHEMA Bluetooth Service", service_ids, appearance, timeout
     )
 
-    await advert.register(bus, adapter)
-
-    # Server-side functional loop - run everything that needs to be proactively handled by the server here.
+    await advert.register(bus, adapter)    # Server-side functional loop - run everything that needs to be proactively handled by the server here.
     while True:
-
         # Handle dbus requests.
         await asyncio.sleep(5)
 

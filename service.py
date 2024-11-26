@@ -21,7 +21,49 @@ class MirrorServ(Service):
         print(f"Ping function called! Sending {toSend}")
         return bytes("pong!", "utf-8")
 
-    @characteristic("413B", CharFlags.READ)
+    @characteristic("413B", CharFlags.WRITE)
+    def backup(self, options):
+        Config.write(Config.read, Identifiers.backup_config)
+    
+    @characteristic("413C", CharFlags.READ)
+    def connect(self, deviceInfo, options):
+        print(f"device connected, info: {deviceInfo}")
+        
+
+
+    # DON'T. do not. please. there's better ways. i just don't. know. how.
+
+
+    #remember: config commented out - go to consts.py
+    @characteristic("4881", CharFlags.READ)
+    def send1(self, options):
+        return bytes(Config.read(1))
+    @characteristic("4882", CharFlags.READ)
+    def send2(self, options):
+        return bytes(Config.read(2))
+    @characteristic("4883", CharFlags.READ)
+    def send3(self, options):
+        return bytes(Config.read(3))
+    @characteristic("4884", CharFlags.READ)
+    def send4(self, options):
+        return bytes(Config.read(4))
+    
+    #remember: config commented out - go to consts.py
+    @characteristic("4991", CharFlags.WRITE)
+    def clearBuf(self, options):
+        Config.write("", Identifiers.buf)
+        print("Cleared buf")
+    @characteristic("4992", CharFlags.WRITE)
+    def receiveBuf(self, config, options):
+        Config.saveToBuffer(config)
+        print("Saved to buffer")
+    @characteristic("4993", CharFlags.WRITE)
+    def finishBuf(self, options):
+        Config.writeFromBuffer()
+        print("Finished buffer saving - Wrote buffer to config")
+
+    """
+    @characteristic("413B", CharFlags.WRITE | CharFlags.READ)
     def send(self, options):
         # print(f"Sending config: {toSend}")
         print(f"sending config with offset={options.offset}, mtu={options.mtu}")
@@ -31,21 +73,4 @@ class MirrorServ(Service):
         toSend = bytes(str(toSend), "utf-8")
         print(f"tosend contents: {toSend}\n ------------------------------------- ")
         return toSend
-    
-    
-    @characteristic("413C", CharFlags.WRITE)
-    def receive(self, config, options):
-        Config.write(config)
-        print("Updating config")
-
-    @characteristic("413D", CharFlags.WRITE)
-    def backup(self, options):
-        Config.write(Config.read, Identifiers.backup_config)
-    
-    @characteristic("413E", CharFlags.READ)
-    def connect(self, deviceInfo, options):
-        print(f"device connected, info: {deviceInfo}")
-        
-    ###@characteristic("4140", CharFlags.READ)
-    ###def resetDefault(self, options):
-    ###    print("Resetting config to default [UNIMPLEMENTED]")
+     """
