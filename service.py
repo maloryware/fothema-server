@@ -37,19 +37,19 @@ class MirrorServ(Service):
     #remember: config commented out - go to consts.py
     @characteristic("4881", CharFlags.READ)
     def send1(self, options):
-        print(f"Sending... -> {Config.read(1)}")
+        print("Sending...")
         return bytes(Config.read(1), "utf-8")
     @characteristic("4882", CharFlags.READ)
     def send2(self, options):
-        print(f"Sending... -> {Config.read(2)}")
+        print("Sending...")
         return bytes(Config.read(2), "utf-8")
     @characteristic("4883", CharFlags.READ)
     def send3(self, options):
-        print(f"Sending... -> {Config.read(3)}")
+        print("Sending...")
         return bytes(Config.read(3), "utf-8")
     @characteristic("4884", CharFlags.READ)
     def send4(self, options):
-        print(f"Sending... -> {Config.read(4)}")
+        print(f"Sending... Complete!\nLast out: {Config.read(4)}")
         return bytes(Config.read(4), "utf-8")
     
     #remember: config commented out - go to consts.py

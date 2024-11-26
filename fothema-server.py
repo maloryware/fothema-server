@@ -14,7 +14,6 @@ timeout = 600
 
 
 async def main():
-    print("server starting")
     bus = await get_message_bus()
     agent = NoIoAgent()
     service = MirrorServ()
@@ -29,6 +28,7 @@ async def main():
     )
 
     await advert.register(bus, adapter)    # Server-side functional loop - run everything that needs to be proactively handled by the server here.
+    print("Server started.")
     while True:
         # Handle dbus requests.
         await asyncio.sleep(5)
