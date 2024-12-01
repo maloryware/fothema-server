@@ -1,6 +1,5 @@
 from bluez_peripheral.gatt.service import Service
 from bluez_peripheral.gatt.characteristic import characteristic, CharacteristicFlags as CharFlags, CharacteristicReadOptions as ReadOptions, CharacteristicWriteOptions as WriteOptions
-from bluez_peripheral.gatt.descriptor import descriptor, DescriptorFlags as DescFlags
 from fileman import Config
 import json
 from consts import Identifiers
