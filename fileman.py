@@ -17,8 +17,7 @@ class Config:
             io[1] = buf[400:800]
             io[2] = buf[800:1200]
             io[3] = buf[1200:1600]
-            # print(f"{io[0]}\n-----\n{io[1]}\n-----\n{io[2]}\n-----\n{io[3]}\n-----\n")
-            return str(io[x-1])
+            return str(io[x])
             
 
     def saveToBuffer(new_config_section):
