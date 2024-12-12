@@ -27,6 +27,14 @@ class MirrorServ(Service):
     @characteristic("413C", CharFlags.READ)
     def connect(self, deviceInfo, options):
         print(f"device connected, info: {deviceInfo}")
+    
+    @characteristic("413D", CharFlags.READ)
+    def getConfigLocation(self, options):
+        return bytes(Identifiers.config)
+    
+    @characteristic("413E", CharFlags.READ)
+    def getBackupLocation(self, options):
+        return bytes(Identifiers.backup_config)
         
 
 
@@ -64,16 +72,3 @@ class MirrorServ(Service):
     def finishBuf(self, options):
         Config.writeFromBuffer()
         print("Finished buffer saving - Wrote buffer to config")
-
-    """
-    @characteristic("413B", CharFlags.WRITE | CharFlags.READ)
-    def send(self, options):
-        # print(f"Sending config: {toSend}")
-        print(f"sending config with offset={options.offset}, mtu={options.mtu}")
-        toSend = Config.read()
-        toSend = json.dumps(toSend)
-        toSend = toSend[options.offset:options.mtu:]
-        toSend = bytes(str(toSend), "utf-8")
-        print(f"tosend contents: {toSend}\n ------------------------------------- ")
-        return toSend
-     """

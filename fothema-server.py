@@ -33,7 +33,5 @@ async def main():
         # Handle dbus requests.
         await asyncio.sleep(5)
 
-    # await bus.wait_for_disconnect()
-
 
 asyncio.run(main())
