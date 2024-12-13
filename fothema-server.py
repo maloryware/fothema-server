@@ -10,7 +10,7 @@ from consts import Identifiers
 
 service_ids = [Identifiers.core_service]
 appearance = 0
-timeout = 600
+timeout = 3600
 
 
 async def main():

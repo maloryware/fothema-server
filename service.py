@@ -1,7 +1,7 @@
 from bluez_peripheral.gatt.service import Service
 from bluez_peripheral.gatt.characteristic import characteristic, CharacteristicFlags as CharFlags, CharacteristicReadOptions as ReadOptions, CharacteristicWriteOptions as WriteOptions
 from fileman import Config
-import json
+import os
 from consts import Identifiers
 
 class MirrorServ(Service):
@@ -16,9 +16,9 @@ class MirrorServ(Service):
     
     @characteristic("413A", CharFlags.READ)
     def ping(self, options):
-        toSend = bytes("pong!")
-        print(f"Ping function called! Sending {toSend}")
-        return bytes("pong!", "utf-8")
+
+        print(f"Ping!")
+        return bytes("SERVER: pong!", "utf-8")
 
     @characteristic("413B", CharFlags.WRITE)
     def backup(self, options):
@@ -35,6 +35,11 @@ class MirrorServ(Service):
     @characteristic("413E", CharFlags.READ)
     def getBackupLocation(self, options):
         return bytes(Identifiers.backup_config)
+    
+    @characteristic("4140", CharFlags.READ)
+    def restartService(self, options):
+        os.system('systemctl restart fothema-mm.service --user')
+        
         
 
 
@@ -64,11 +69,14 @@ class MirrorServ(Service):
     def clearBuf(self, options):
         Config.write("", Identifiers.buf)
         print("Cleared buf")
+        return bytes("SERVER: Cleared buf", "utf-8")
     @characteristic("4992", CharFlags.WRITE)
     def receiveBuf(self, config, options):
         Config.saveToBuffer(config)
         print("Saved to buffer")
-    @characteristic("4993", CharFlags.WRITE)
+        return bytes("SERVER: Saved to buffer.", "utf-8")
+    @characteristic("4993", CharFlags.WRITE | CharFlags.READ)
     def finishBuf(self, options):
         Config.writeFromBuffer()
         print("Finished buffer saving - Wrote buffer to config")
+        return bytes("SERVER: Finished buffer saving - Wrote buffer to config; You can now issue a restart.", "utf-8")
