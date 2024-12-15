@@ -27,7 +27,8 @@ class MirrorServ(Service):
     @characteristic("413C", CharFlags.READ)
     def connect(self, options):
         print(f"device connected, info: nil")
-    
+        return bytes("connected", "utf-8")
+
     @characteristic("413D", CharFlags.READ)
     def getConfigLocation(self, options):
         return bytes(Identifiers.config, "utf-8")
@@ -39,7 +40,7 @@ class MirrorServ(Service):
     @characteristic("4140", CharFlags.READ)
     def restartService(self, options):
         os.system('systemctl restart fothema-mm.service --user')
-        return bytes("connected", "utf-8")
+        return bytes("restarting", "utf-8")
         
         
 
