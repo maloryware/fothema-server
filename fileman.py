@@ -26,10 +26,10 @@ class Config:
     
     def writeFromBuffer():
         with open(Identifiers.buf) as b:
-            Config.write(b.read())
+            Config.writeShort(b.read())
         
 
-    def write(new_config):
+    def writeShort(new_config):
         #remember: config commented out - go to consts.py
         Config.write(new_config, Identifiers.config)
     
