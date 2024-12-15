@@ -9,10 +9,11 @@ class MirrorServ(Service):
     
     def __init__(self):
         self._tmp = None
+        self._cnfg = None
         super().__init__(Identifiers.core_service, True)
     
     # purely testing
-    @characteristic("4139", CharFlags.NOTIFY | CharFlags.WRITE)
+    @characteristic("4139", CharFlags.WRITE)
     def update(self, options):
         pass
     
@@ -77,10 +78,11 @@ class MirrorServ(Service):
         print("Cleared buf")
         return bytes("SERVER: Cleared buf", "utf-8")
     
-    @characteristic("4992", CharFlags.WRITE | CharFlags.WRITE_WITHOUT_RESPONSE | CharFlags.READ)
+    @characteristic("4992", CharFlags.WRITE | CharFlags.WRITE_WITHOUT_RESPONSE | CharFlags.READ).setter
     def receiveBuf(self, inbound, options):
         self._tmp = inbound
         Config.saveToBuffer(bytes.decode(self._tmp))
+        # str.join(self._cnfg, self._tmp)
         print("Saved to buffer")
         return bytes("SERVER: Saved to buffer.", "utf-8")
     
