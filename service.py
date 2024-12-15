@@ -75,13 +75,13 @@ class MirrorServ(Service):
         print("Cleared buf")
         return bytes("SERVER: Cleared buf", "utf-8")
     
-    @characteristic("4992", CharFlags.WRITE)
+    @characteristic("4992", CharFlags.WRITE | CharFlags.READ)
     def receiveBuf(self, config, options):
         Config.saveToBuffer(config)
         print("Saved to buffer")
         return bytes("SERVER: Saved to buffer.", "utf-8")
     
-    @characteristic("4993", CharFlags.WRITE)
+    @characteristic("4993", CharFlags.WRITE | CharFlags.READ)
     def finishBuf(self, options):
         Config.writeFromBuffer()
         print("Finished buffer saving - Wrote buffer to config")
