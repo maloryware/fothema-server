@@ -26,7 +26,7 @@ class Config:
     
     def writeFromBuffer():
         with open(Identifiers.buf) as b:
-            Config.writeShort(b.read(), Identifiers.config)
+            Config.write(b.read(), Identifiers.config)
     
     def write(new_config, location):
         with open(location, "w") as saved:
