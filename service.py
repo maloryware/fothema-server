@@ -70,11 +70,11 @@ class MirrorServ(Service):
         return bytes(Config.read(3), "utf-8")
     
     #remember: config commented out - go to consts.py
-    @characteristic("4991", CharFlags.WRITE)
+    @characteristic("4991", CharFlags.WRITE | CharFlags.READ)
     def clearBuf(self, options):
         Config.write("", Identifiers.buf)
         print("Cleared buf")
-        #return bytes("SERVER: Cleared buf", "utf-8")
+        return bytes("SERVER: Cleared buf", "utf-8")
     @characteristic("4992", CharFlags.WRITE)
     def receiveBuf(self, config, options):
         Config.saveToBuffer(config)
