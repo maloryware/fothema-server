@@ -25,8 +25,8 @@ class MirrorServ(Service):
         Config.write(Config.read, Identifiers.backup_config)
     
     @characteristic("413C", CharFlags.READ)
-    def connect(self, options, deviceInfo):
-        print(f"device connected, info: {deviceInfo}")
+    def connect(self, options):
+        print(f"device connected, info: nil")
     
     @characteristic("413D", CharFlags.READ)
     def getConfigLocation(self, options):
