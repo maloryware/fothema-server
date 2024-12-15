@@ -25,7 +25,7 @@ class MirrorServ(Service):
         Config.write(Config.read, Identifiers.backup_config)
     
     @characteristic("413C", CharFlags.READ)
-    def connect(self, deviceInfo, options):
+    def connect(self, options, deviceInfo):
         print(f"device connected, info: {deviceInfo}")
     
     @characteristic("413D", CharFlags.READ)
@@ -71,7 +71,7 @@ class MirrorServ(Service):
         print("Cleared buf")
         return bytes("SERVER: Cleared buf", "utf-8")
     @characteristic("4992", CharFlags.WRITE | CharFlags.READ)
-    def receiveBuf(self, config, options):
+    def receiveBuf(self, options, config):
         Config.saveToBuffer(config)
         print("Saved to buffer")
         return bytes("SERVER: Saved to buffer.", "utf-8")
