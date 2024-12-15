@@ -9,6 +9,7 @@ class MirrorServ(Service):
     
     def __init__(self):
         self.__config__ = None
+        self.empty = None
         super().__init__(Identifiers.core_service, True)
     
     # purely testing
@@ -22,7 +23,7 @@ class MirrorServ(Service):
         print(f"Ping!")
         return bytes("SERVER: pong!", "utf-8")
 
-    @characteristic("413B", CharFlags.WRITE_WITHOUT_RESPONSE)
+    @characteristic("413B", CharFlags.READ)
     def backup(self, options):
         Config.write(Config.read, Identifiers.backup_config)
     
