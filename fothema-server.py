@@ -31,7 +31,7 @@ async def main():
     print("Server started.")
     while True:
         # Handle dbus requests.
-        await asyncio.sleep(5)
+        await asyncio.sleep(50)
 
 
 asyncio.run(main())
