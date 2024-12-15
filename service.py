@@ -20,7 +20,7 @@ class MirrorServ(Service):
         print(f"Ping!")
         return bytes("SERVER: pong!", "utf-8")
 
-    @characteristic("413B", CharFlags.WRITE)
+    @characteristic("413B", CharFlags.WRITE_WITHOUT_RESPONSE)
     def backup(self, options):
         Config.write(Config.read, Identifiers.backup_config)
     
@@ -75,14 +75,14 @@ class MirrorServ(Service):
         print("Cleared buf")
         return bytes("SERVER: Cleared buf", "utf-8")
     
-    @characteristic("4992", CharFlags.WRITE)
+    @characteristic("4992", CharFlags.WRITE_WITHOUT_RESPONSE)
     def receiveBuf(self, config, options):
         Config.saveToBuffer(config)
         print("Saved to buffer")
-        return bytes("SERVER: Saved to buffer.", "utf-8")
+        #return bytes("SERVER: Saved to buffer.", "utf-8")
     
-    @characteristic("4993", CharFlags.WRITE)
+    @characteristic("4993", CharFlags.WRITE_WITHOUT_RESPONSE)
     def finishBuf(self, options):
         Config.writeFromBuffer()
         print("Finished buffer saving - Wrote buffer to config")
-        return bytes("SERVER: Finished buffer saving - Wrote buffer to config; You can now issue a restart.", "utf-8")
+        #return bytes("SERVER: Finished buffer saving - Wrote buffer to config; You can now issue a restart.", "utf-8")
