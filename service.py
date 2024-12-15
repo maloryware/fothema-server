@@ -8,8 +8,8 @@ class MirrorServ(Service):
 
     
     def __init__(self):
-        self.config: str = None
-        self.empty: str = None
+        self.config: str = ""
+        self.empty: str = ""
         super().__init__(Identifiers.core_service, True)
     
     # purely testing
