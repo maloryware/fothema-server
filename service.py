@@ -5,7 +5,6 @@ import os
 from consts import Identifiers
 
 class MirrorServ(Service):
-
     def __init__(self):
         super().__init__(Identifiers.core_service, True)
     
@@ -77,7 +76,8 @@ class MirrorServ(Service):
     
     @characteristic("4992", CharFlags.WRITE | CharFlags.READ)
     def receiveBuf(self, config, options):
-        Config.saveToBuffer(config)
+        conf = bytes.decode(config)
+        Config.saveToBuffer(conf)
         print("Saved to buffer")
         return bytes("SERVER: Saved to buffer.", "utf-8")
     
