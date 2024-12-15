@@ -79,9 +79,9 @@ class MirrorServ(Service):
         return bytes("SERVER: Cleared buf", "utf-8")
     
     @characteristic("4992", CharFlags.WRITE | CharFlags.WRITE_WITHOUT_RESPONSE | CharFlags.READ)
-    def receiveBuf(self, input, options):
-        self.config = bytes.decode(input)
-        Config.saveToBuffer(self.config)
+    def receiveBuf(self, inbound, options):
+        
+        Config.saveToBuffer(bytes.decode(inbound))
         print("Saved to buffer")
         return bytes("SERVER: Saved to buffer.", "utf-8")
     
