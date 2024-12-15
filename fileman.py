@@ -10,8 +10,8 @@ class Config:
             config = saved.read()
             config = str(config).replace("let config = ", "")
             buf = re.sub(f";(\\n|.)*", "", str(config))
-            buf = re.sub(f"(\S.+)(?=: )", '"\\1"', buf)
-            buf = re.sub(f"(\\t*\(\\n+| \s+))\\t*", "", buf)    
+            buf = re.sub(f"(\\S.+)(?=: )", '"\\1"', buf)
+            buf = re.sub(f"(\\t*\(\\n+| \\s+))\\t*", "", buf)    
             io = ["", "", "", ""]
             io[0] = buf[0:400]
             io[1] = buf[400:800]
