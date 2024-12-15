@@ -9,9 +9,9 @@ class Config:
         with open(Identifiers.config) as saved:
             config = saved.read()
             config = str(config).replace("let config = ", "")
-            buf = re.sub(f";(\n|.)*", "", str(config))
-            buf = re.sub(f"(\S.+)(?=: )", '"\1"', buf)
-            buf = re.sub(f"(\t*(\n+| \s+))\t*", "", buf)    
+            buf = re.sub(f";(\\n|.)*", "", str(config))
+            buf = re.sub(f"(\S.+)(?=: )", '"\\1"', buf)
+            buf = re.sub(f"(\\t*\(\\n+| \s+))\\t*", "", buf)    
             io = ["", "", "", ""]
             io[0] = buf[0:400]
             io[1] = buf[400:800]
@@ -33,9 +33,9 @@ class Config:
 
             saved.write("let config = ")
             buf = json.dumps(new_config, sort_keys=True, indent=4)
-            buf = re.sub(f'(")(\S.+)(")(?=: )', f'\2', buf)
+            buf = re.sub(f'(")(\S.+)(")(?=: )', f'\\2', buf)
             saved.write(buf)
             saved.write("; \n\n")
-            saved.write("if (typeof module !== \"undefined\") { module.exports = config; }")
+            saved.write('if (typeof module !== "undefined") { module.exports = config; }')
 
         
