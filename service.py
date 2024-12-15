@@ -61,7 +61,7 @@ class MirrorServ(Service):
         return bytes(Config.read(2), "utf-8")
     @characteristic("4884", CharFlags.READ)
     def send4(self, options):
-        print(f"Sending... Complete!\nLast out: {Config.read(4)}")
+        print(f"Sending... Complete!\nLast out: {Config.read(3)}")
         return bytes(Config.read(3), "utf-8")
     
     #remember: config commented out - go to consts.py
