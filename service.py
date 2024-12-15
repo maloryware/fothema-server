@@ -30,11 +30,11 @@ class MirrorServ(Service):
     
     @characteristic("413D", CharFlags.READ)
     def getConfigLocation(self, options):
-        return bytes(Identifiers.config)
+        return bytes(Identifiers.config, "utf-8")
     
     @characteristic("413E", CharFlags.READ)
     def getBackupLocation(self, options):
-        return bytes(Identifiers.backup_config)
+        return bytes(Identifiers.backup_config, "utf-8")
     
     @characteristic("4140", CharFlags.READ)
     def restartService(self, options):
