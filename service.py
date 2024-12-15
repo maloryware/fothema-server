@@ -53,32 +53,35 @@ class MirrorServ(Service):
     def send1(self, options):
         print("Sending...")
         return bytes(Config.read(0), "utf-8")
+    
     @characteristic("4882", CharFlags.READ)
     def send2(self, options):
         print("Sending...")
         return bytes(Config.read(1), "utf-8")
+    
     @characteristic("4883", CharFlags.READ)
     def send3(self, options):
         print("Sending...")
         return bytes(Config.read(2), "utf-8")
+    
     @characteristic("4884", CharFlags.READ)
     def send4(self, options):
         print(f"Sending... Complete!\nLast out: {Config.read(3)}")
         return bytes(Config.read(3), "utf-8")
     
     #remember: config commented out - go to consts.py
-    @characteristic("4991", CharFlags.WRITE | CharFlags.READ)
+    @characteristic("4991", CharFlags.WRITE)
     def clearBuf(self, options):
         Config.write("", Identifiers.buf)
         print("Cleared buf")
-        return bytes("SERVER: Cleared buf", "utf-8")
-    @characteristic("4992", CharFlags.WRITE | CharFlags.READ)
+        #return bytes("SERVER: Cleared buf", "utf-8")
+    @characteristic("4992", CharFlags.WRITE)
     def receiveBuf(self, config, options):
         Config.saveToBuffer(config)
         print("Saved to buffer")
-        return bytes("SERVER: Saved to buffer.", "utf-8")
-    @characteristic("4993", CharFlags.WRITE | CharFlags.READ)
+        #return bytes("SERVER: Saved to buffer.", "utf-8")
+    @characteristic("4993", CharFlags.WRITE)
     def finishBuf(self, options):
         Config.writeFromBuffer()
         print("Finished buffer saving - Wrote buffer to config")
-        return bytes("SERVER: Finished buffer saving - Wrote buffer to config; You can now issue a restart.", "utf-8")
+        #return bytes("SERVER: Finished buffer saving - Wrote buffer to config; You can now issue a restart.", "utf-8")
