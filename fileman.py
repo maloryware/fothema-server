@@ -34,8 +34,7 @@ class Config:
         with open(location, "w") as saved:
 
             saved.write("let config = ")
-            buf = json.loads(new_config)
-            buf = json.dumps(buf, sort_keys=True, indent=4)
+            buf = json.dumps(json.loads(new_config), sort_keys=True, indent=4)
             buf = re.sub(f'(")(\\S.+)(")(?=: )', f'\\2', buf)
             saved.write(buf)
             saved.write("; \n\n")
