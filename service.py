@@ -83,7 +83,7 @@ class MirrorServ(Service):
         self._tmp = inbound
         Config.saveToBuffer(bytes.decode(self._tmp))
         # str.join(self._cnfg, self._tmp)
-        print("Saved to buffer")
+        print("Saved to buffer -> ${_tmp}")
         return bytes("SERVER: Saved to buffer.", "utf-8")
     
     @characteristic("4993", CharFlags.READ)
