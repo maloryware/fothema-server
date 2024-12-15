@@ -25,8 +25,8 @@ class Config:
             buf.write(new_config_section)
     
     def writeFromBuffer():
-        with open(Identifiers.buf).read() as buf:
-            Config.write(buf)
+        with open(Identifiers.buf) as b:
+            Config.write(b.read())
         
 
     def write(new_config):
