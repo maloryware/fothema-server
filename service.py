@@ -39,6 +39,7 @@ class MirrorServ(Service):
     @characteristic("4140", CharFlags.READ)
     def restartService(self, options):
         os.system('systemctl restart fothema-mm.service --user')
+        return bytes("connected", "utf-8")
         
         
 
