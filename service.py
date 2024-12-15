@@ -69,17 +69,18 @@ class MirrorServ(Service):
         print(f"Sending... Complete!\nLast out: {Config.read(3)}")
         return bytes(Config.read(3), "utf-8")
     
-    #remember: config commented out - go to consts.py
     @characteristic("4991", CharFlags.READ)
     def clearBuf(self, options):
         Config.write("", Identifiers.buf)
         print("Cleared buf")
         return bytes("SERVER: Cleared buf", "utf-8")
+    
     @characteristic("4992", CharFlags.WRITE)
     def receiveBuf(self, config, options):
         Config.saveToBuffer(config)
         print("Saved to buffer")
         return bytes("SERVER: Saved to buffer.", "utf-8")
+    
     @characteristic("4993", CharFlags.WRITE)
     def finishBuf(self, options):
         Config.writeFromBuffer()
