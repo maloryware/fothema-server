@@ -9,17 +9,14 @@ class MirrorServ(Service):
     
     def __init__(self):
         self._tmp = None
-        self._cnfg = None
         super().__init__(Identifiers.core_service, True)
     
-    # purely testing
     @characteristic("4139", CharFlags.WRITE)
     def update(self, options):
         pass
     
     @characteristic("413A", CharFlags.READ)
     def ping(self, options):
-
         print(f"Ping!")
         return bytes("SERVER: pong!", "utf-8")
 
@@ -47,11 +44,6 @@ class MirrorServ(Service):
         
         
 
-
-    # DON'T. do not. please. there's better ways. i just don't. know. how.
-
-
-    #remember: config commented out - go to consts.py
     @characteristic("4881", CharFlags.READ)
     def send1(self, options):
         print("Sending...")
@@ -74,7 +66,7 @@ class MirrorServ(Service):
     
     @characteristic("4991", CharFlags.READ)
     def clearBuf(self, options):    
-        Config.write("", Identifiers.buf)
+        Config.clear(Identifiers.buf)
         print("Cleared buf")
         return bytes("SERVER: Cleared buf", "utf-8")
     
@@ -82,7 +74,6 @@ class MirrorServ(Service):
     def receiveBuf(self, inbound, options):
         self._tmp = inbound
         Config.saveToBuffer(bytes.decode(self._tmp))
-        # str.join(self._cnfg, self._tmp)
         print(f"Saved to buffer -> {inbound}")
         return bytes("SERVER: Saved to buffer.", "utf-8")
     

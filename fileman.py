@@ -25,7 +25,11 @@ class Config:
     def saveToBuffer(new_config_section):
         with open(Identifiers.buf, "a") as buf:
             buf.write(new_config_section)
-    
+            
+    def clear(file):
+        with open(file, "w") as toc:
+            toc.write("")
+
     def writeFromBuffer():
         with open(Identifiers.buf) as b:
             Config.write(b.read(), Identifiers.config)
