@@ -25,7 +25,8 @@ class Config:
     def saveToBuffer(new_config_section):
         with open(Identifiers.buf, "a") as buf:
             buf.write(new_config_section)
-            
+            print(f"\n\nSaved to buffer: {new_config_section}\n\n")
+
     def clear(file):
         with open(file, "w") as toc:
             toc.write("")
